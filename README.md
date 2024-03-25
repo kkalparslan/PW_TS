@@ -1,6 +1,6 @@
 ---
 
-"This project is prepared using the TypeScript and the Playwright. The main topics covered are listed below:
+"This project is prepared using TypeScript and the Playwright. The main topics covered are listed below:
 
 - Locators
 - Assertions
