@@ -1,5 +1,11 @@
 import { test, expect } from "@playwright/test";
 
+/**
+ Soft assertion, mevcut assertionların tamamını değerlendirir, işleme koyar ve tüm hataları bize
+ liste olarak verir.
+ Hard assertion ise hatayı ilk gördüğü yerde programı böler ve durdurur. Temel farkları bu şekildedir.
+ */
+
 test('Soft assertion', async({page})=>{
     await page.goto("https://demoqa.com/");
     await expect.soft(page.getByText("Book Store Application")).not.toBeInViewport();
