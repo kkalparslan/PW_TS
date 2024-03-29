@@ -45,5 +45,43 @@ test.describe("Form elements",()=>{
         }    
         })
 
+        test("Dropdowns intro",async({page})=>{
+            const dropdown=page.locator("#country");
+            /**
+             Select tag li dropdaown menuleri javadaki gibi 3 şekilde locate edebiliriz. elementin texti,
+             elementin value su ve elementin indexi ile. selectOption() metodu kullanılır. text direk yazılırken
+             value ve index kullanılırsa selectOption içerisine önce bu option yazılır ve sonra değer girilir.
+             */      
+            await dropdown.selectOption("Canada");
+            await dropdown.selectOption({value:"germany"});
+            await dropdown.selectOption({index:5});
+      
+            const options=page.locator("#country option");
+      
+            await expect(options).toHaveCount(10);
+      
+            expect(await options.allTextContents()).toContain("China");
+      
+            const optionsArray=page.$$("#country option");
+      
+            expect(await optionsArray).toHaveLength(10);
+            let status:boolean; 
+            /**
+             * let: let değiştirilebilir değişkenler tanımlamak için kullanılır. Yani, bir değeri atanabilir 
+             * ve daha sonra bu değer değiştirilebilir
+             * const: const sabit değişkenler tanımlamak için kullanılır. Bir kere değer atandıktan sonra 
+             * değiştirilemez. Yani değişkeni let ile tanımladığımızda bu değişken immutable olmuyor. 
+            kod içerisinde farklı değerler alabiliyor. const ile initialise olursa immutable yani sabit oluyor.
+             */  
+            status=false;
 
-})
+            for(const each of await optionsArray){
+              let opt=await each.textContent();
+              if(opt=="China"){
+                status=true;
+                break;      
+              }
+            }      
+            expect(status).toBeTruthy();      
+          })
+        })
