@@ -48,13 +48,13 @@ test.describe("Form elements", () => {
   test("Dropdowns intro", async ({ page }) => {
     const dropdown = page.locator("#country");
     /**
-     Select tag li dropdaown menuleri javadaki gibi 3 şekilde locate edebiliriz. elementin texti,
-     elementin value su ve elementin indexi ile. selectOption() metodu kullanılır. text direk yazılırken
+     Select tag li dropdown menuleri javadaki gibi 3 şekilde locate edebiliriz. Elementin texti,
+     elementin value su ve elementin indexi ile. selectOption() metodu kullanılır. Text direk yazılırken
      value ve index kullanılırsa selectOption içerisine önce bu option yazılır ve sonra değer girilir.
      */
-    await dropdown.selectOption("Canada");
-    await dropdown.selectOption({ value: "germany" });
-    await dropdown.selectOption({ index: 5 });
+    await dropdown.selectOption("Canada"); //text ile 
+    await dropdown.selectOption({ value: "germany" }); //value ile
+    await dropdown.selectOption({ index: 5 }); //index ile
 
     const options = page.locator("#country option");
 
@@ -86,45 +86,53 @@ test.describe("Form elements", () => {
   })
 
   /**
-   Multi select dropdowns. Select tag ine sahip bazı dropdownlarda (muştiple işaretli olanları) 
+   Multi select dropdowns. Select tag ine sahip bazı dropdownlarda (multiple işaretli olanları) 
    multiple seçim yapılabilir. 
    */
   test("Multi-select dropdowns", async ({ page }) => {
     const multiSelect = page.locator("#colors");
-    await multiSelect.selectOption(["Red", "Blue", "Green"]); //text ile
-    await multiSelect.selectOption(["red", "blue", "green"]); //value ile  
-    await expect(multiSelect).toHaveValues(["red", "blue", "green"]);
-    //assertion için elementin value değerleri girilmelidir.      
-  })
-})
+    // await multiSelect.selectOption(["Red", "Blue", "Green"]); //text ile
+    // await multiSelect.selectOption(["red", "blue", "green"]); //value ile  
+    await multiSelect.selectOption({ index: 0 });
+    await multiSelect.selectOption({ index: 1 });
+    await multiSelect.selectOption({ index: 2 });
+    await expect(multiSelect).toHaveValue("green");
+    //await expect(multiSelect).toHaveValues(["red","blue","green"]);    
+    //assertion için elementin value değerleri girilmelidir.     
 
-test.describe("Dropdowns without select tag", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("https://www.arabam.com/ikinci-el?days=1");
-  })
-
-  test("Muti-select without select tag", async ({ page }) => {
-   // const dropdown = page.locator("//span[@class='selected-items-names']").first();
-    //await dropdown.isVisible();
-    //await dropdown.click();
-   // await page.locator("//span[@class='selected-items-names']").first().click();
-   await page.locator("//span[text()='Otomobil']").click();
-
-    const city1 = page.getByText("İstanbul Avrupa");
-    const city2 = page.getByText("İstanbul Anadolu");
-
-    // await city1.check();
-    // await city2.check();       
+    //     const colorsToSelect = [0, 1, 2]; // Seçmek istediğim renklerin index'leri
+    // for (const index of colorsToSelect) {
+    //     await multiSelect.selectOption({ index }); 
+    // }
+       })
   })
 
-  test("Dropdowns without select", async ({ page }) => {
+  test.describe("Dropdowns without select tag", () => {
+    test.beforeEach(async ({ page }) => {
+      await page.goto("https://www.arabam.com/ikinci-el?days=1");
+    })
 
-    const dropdown = page.getByText("İlan Sahibi");
-    await dropdown.click();
+    test("Multi-select without select tag", async ({ page }) => {
+      const searchBox = page.getByPlaceholder("Kelime, galeri adı veya ilan no ile ara");
+      await searchBox.fill("mazda 3");
+      //const dropdown=page.locator("//span[text()='İl']");
+      //await dropdown.click();
 
-    const option = page.locator("//label[@class='radio']").nth(0);
-    const option1 = page.locator("//label[@class='radio']").nth(1);
-    await option.check();
-    await option1.check();
+      //  const city1=page.getByText("İstanbul Avrupa");
+      //  const city2=page.getByText("İstanbul Anadolu");    
+
+      // await city1.check();
+      // await city2.check();       
+    })
+
+    test("Dropdowns without select", async ({ page }) => {
+
+      const dropdown = page.getByText("    İlan Sahibi    ");
+      await dropdown.click();
+
+      const option = page.locator("//label[@class='radio']").nth(0);
+      const option1 = page.locator("//label[@class='radio']").nth(1);
+      await option.check();
+      await option1.check();
+    })
   })
-})
