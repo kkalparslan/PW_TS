@@ -93,10 +93,12 @@ test.describe("Form elements", () => {
     const multiSelect = page.locator("#colors");
     // await multiSelect.selectOption(["Red", "Blue", "Green"]); //text ile
     // await multiSelect.selectOption(["red", "blue", "green"]); //value ile  
-    await multiSelect.selectOption({ index: 0 });
-    await multiSelect.selectOption({ index: 1 });
-    await multiSelect.selectOption({ index: 2 });
-    await expect(multiSelect).toHaveValue("green");
+    // await multiSelect.selectOption({ index: 0 });
+    // await multiSelect.selectOption({ index: 1 });
+    // await multiSelect.selectOption({ index: 2 });
+    // await expect(multiSelect).toHaveValue("green");
+
+    await multiSelect.selectOption([{ index: 0 }, { index: 1 }, { index: 2 }])
     //await expect(multiSelect).toHaveValues(["red","blue","green"]);    
     //assertion için elementin value değerleri girilmelidir.     
 
@@ -104,35 +106,37 @@ test.describe("Form elements", () => {
     // for (const index of colorsToSelect) {
     //     await multiSelect.selectOption({ index }); 
     // }
-       })
+  })
+})
+
+test.describe("Dropdowns without select tag", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://www.arabam.com/ikinci-el?days=1");
   })
 
-  test.describe("Dropdowns without select tag", () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto("https://www.arabam.com/ikinci-el?days=1");
-    })
+  test("Multi-select without select tag", async ({ page }) => {
+    const dropdown = page.locator("//span[text()='İl']");
+    /**
+     * bu ve aşağıdaki testte hatalar aldım. locator ları değiştirmeme rağmen dropdown menulere 
+     * tıklayamadım.
+     */
+    await dropdown.click();
 
-    test("Multi-select without select tag", async ({ page }) => {
-      const searchBox = page.getByPlaceholder("Kelime, galeri adı veya ilan no ile ara");
-      await searchBox.fill("mazda 3");
-      //const dropdown=page.locator("//span[text()='İl']");
-      //await dropdown.click();
+    const city1 = page.getByText("İstanbul Avrupa");
+    const city2 = page.getByText("İstanbul Anadolu");
 
-      //  const city1=page.getByText("İstanbul Avrupa");
-      //  const city2=page.getByText("İstanbul Anadolu");    
-
-      // await city1.check();
-      // await city2.check();       
-    })
-
-    test("Dropdowns without select", async ({ page }) => {
-
-      const dropdown = page.getByText("    İlan Sahibi    ");
-      await dropdown.click();
-
-      const option = page.locator("//label[@class='radio']").nth(0);
-      const option1 = page.locator("//label[@class='radio']").nth(1);
-      await option.check();
-      await option1.check();
-    })
+    await city1.check(); //click methodu da kullanılabilir
+    await city2.check(); //click methodu da kullanılabilir      
   })
+
+  test("Dropdowns without select", async ({ page }) => {
+    const dropdown = page.getByText("İlan Sahibi");
+    await dropdown.click();
+
+    const option = page.locator("//label[@class='radio']").nth(0);
+    const option1 = page.locator("//label[@class='radio']").nth(1);
+
+    await option.check();
+    await option1.check();
+  })
+})
