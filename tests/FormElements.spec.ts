@@ -53,6 +53,7 @@ test.describe("Form elements", () => {
      value ve index kullanılırsa selectOption içerisine önce bu option yazılır ve sonra değer girilir.
      */
     await dropdown.selectOption("Canada"); //text ile 
+    
     await dropdown.selectOption({ value: "germany" }); //value ile
     await dropdown.selectOption({ index: 5 }); //index ile
 
