@@ -13,17 +13,16 @@ test.describe("Frames",()=>{
     })
 
     test("Iframe2",async({page})=>{     
-      const frame1=page.frame({url:"https://demoqa.com/sample"}); //2- frame objesi ile.
+      const frame1=page.frame({url:"https://demoqa.com/sample"}); //2- frame objesi ile kullanımı. 
+      //ya name yada frame in url i (source) ile locate edilir.
       const elementText=await frame1?.getByText("This is a sample page").textContent();
-      //şayet bir nesne null veya undefined ise program duracaktır. eğer null yada undefined ise
-      //sonucu bu şekilde de döndürsün ama program da devam etsin istiyorsak bunu "optional chaining"
-      //operatörü yani ? soru işareti koyarak düzenleyebiliriz. program crash olmadan sonucu ne ise
-      //onu döndürüyor. VSCode un son güncellemelerinden sonra bu soru işaretini otomatik olarak koymaya 
-      //başladı.
+      //şayet bir (frame nesnesi) nesne null veya undefined ise program duracaktır. eğer null yada undefined 
+      //ise sonucu bu şekilde de döndürsün ama program da devam etsin istiyorsak bunu "optional chaining"
+      //operatörü yani ? soru işareti koyarak düzenleyebiliriz. program crash olmadan sonucu ne ise onu 
+      //döndürüyor. VSCode un son güncellemelerinden sonra bu soru işaretini otomatik olarak koymaya başladı.
       expect(elementText).toBe("This is a sample page");
     })     
 })
-
 
 test.describe("Iframes Test Automation",()=>{
   test.beforeEach(async({page})=>{
@@ -33,17 +32,17 @@ test.describe("Iframes Test Automation",()=>{
   test("Iframe3",async({page})=>{
      
     const frame3=page.frame({url:"https://fs24.formsite.com/res/showFormEmbed?EParam=m_OmK8apOTDpwCqUlfXbL2rYe2Y6sJfY&796456169&EmbedId=796456169"});
-    const name:string="Faruk";
+    const name:string="Alparslan";
     const textField=frame3?.locator("#RESULT_TextField-0");
     await textField?.fill(name);
     expect(await textField?.inputValue()).toBe(name);
 
     const maleRadioBtn=frame3?.getByText("Male").nth(0);
-    await maleRadioBtn?.check();
+    await maleRadioBtn?.check(); //click() de kullanılabilir. 
     expect(await maleRadioBtn?.isChecked()).toBeTruthy();
 
     let date:string;
-    date="07/10/2024";
+    date="01/04/2024";
 
     const dateField=frame3?.locator("id=RESULT_TextField-2");
     await dateField?.fill(date);
@@ -51,7 +50,8 @@ test.describe("Iframes Test Automation",()=>{
 
     const dropdown=frame3?.locator("id=RESULT_RadioButton-3");
     const selectedInputValue="Radio-1";
+    //await dropdown?.selectOption("Automation Engineer"); texti ile seçip value ile doğrulama da yapılabilir.
     await dropdown?.selectOption({value:selectedInputValue});
     expect(await dropdown?.inputValue()).toBe(selectedInputValue);
   })
-})
+}) 
