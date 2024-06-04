@@ -24,7 +24,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   
   use: {
-    headless: true, //ister bu şekilde headed mod da koştururuz yada burayı 
+    headless: false, //ister bu şekilde headed mod da koştururuz yada burayı 
     // iptal edip terminalde testleri koştururken kodumuza --headed ekleriz. 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
