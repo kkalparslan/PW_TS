@@ -9,7 +9,7 @@ import exp from "constants";
  işlemlerindeki gibi. Playwright taki bu page nesnesi ile birlikte gelen methhodlar da asenkron 
  çalışmaktadır. Örneğin goto() metodu üzerine geldiğimizde çıkan açıklamada promise döndüğünü
  görebiliriz. bir method promise döndürüyorsa burada asenkron bir yapı olduğu anlaşılır. bu 
- durumu senkronize etmek için ise "async" ve "await" keywordları kullanılmaktadır......*/
+ durumu senkronize etmek için ise "async" ve "await" keywordları kullanılmaktadır*/
 test('Verify that the website is accessable', async ({ page }) => {
     await page.goto("https://www.demoblaze.com/")
     await expect(page).toHaveTitle("STORE")
