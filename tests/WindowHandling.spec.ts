@@ -30,6 +30,9 @@ test.describe("Handling windows", () => {
         await page.bringToFront(); //bu kodu kullanmasakta aşağıdaki işlemi yapar. 
         //Ancak UI da görülmesi isteniyorsa o sayfa bu kod bloğu ile öne getirilmelidir.
         await page.waitForTimeout(2000);
-        await page.getByText("Elements").click();        
+        await page.getByText("Elements").click();   
+        
+        expect(page2.url()).toBe("https://demoqa.com/sample") //işlem yapılan sayfayı biz 
+        //göremesekte, playwright görüyor ve tanımlı methodun gereğini yapıyor. 
     })
 })
