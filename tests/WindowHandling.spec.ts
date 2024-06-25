@@ -52,5 +52,22 @@ test.describe("Handling windows", () => {
             const eachPageUrl = eachPage.url();
             console.log(`èach page url: ${eachPageUrl}`);
         }        
-    })    
+    })   
+    
+    test("Popup",async({page,context})=>{
+        const popupPromise=page.waitForEvent('popup');//pop up ın referansını page nesnesi sayesinde
+        //alıyoruz. yeni açılan bir tab(window) in referansını ise context nesnesi ile almıştık.
+        //yani tetiklenince açılacak olan pop up ın referansını al diyoruz. await koymamamızın nedeni
+        //de bu. await koyarsak şayet bu kod bloğu çalışana kadar bekletir.
+        await page.getByText("New Window").nth(0).click()
+        const popup=await popupPromise;
+        await popup.waitForLoadState();
+    
+        const popupText=popup.getByText("This is a sample page");
+        await expect(popupText).toBeVisible();
+        await page.waitForTimeout(2000);
+        await popup.close(); //sayfayı, popup ı ne isim ile açıyorsak o isimle kapatıyoruz.
+        await page.waitForTimeout(2000);
+        await page.close();    
+    })
 })
