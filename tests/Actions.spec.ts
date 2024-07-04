@@ -42,6 +42,5 @@ test.describe("Actions", () => {
     const coppiedTextBox = pageTwo.locator("#field2");
     expect(await coppiedTextBox.inputValue()).toBe("Hello World!");
     //await expect(coppiedTextBox).toHaveValue("Hello World!")
-
   })
 })
