@@ -35,16 +35,36 @@ test.describe("Actions", () => {
      * context (pencere, tab) açılarak örneğin farklı bir siteye gidilerek orada testler yapılabilir.
      */
 
-    const pageTwo = await context.newPage();
+    const pageTwo = await context.newPage(); //burada yeni bir context açmış oldum.
     await pageTwo.goto("https://testautomationpractice.blogspot.com/");
     await pageTwo.evaluate(() => {
       window.scrollTo(0, 200);
     })
-    const coppyTextBtn = pageTwo.getByText("Copy Text");
-    await coppyTextBtn.dblclick();
+    const copyTextBtn = pageTwo.getByText("Copy Text");
+    await copyTextBtn.dblclick();
 
-    const coppiedTextBox = pageTwo.locator("#field2");
-    expect(await coppiedTextBox.inputValue()).toBe("Hello World!");
-    //await expect(coppiedTextBox).toHaveValue("Hello World!")
-  })
+    const copiedTextBox = pageTwo.locator("#field2");
+    expect(await copiedTextBox.inputValue()).toBe("Hello World!");
+    //await expect(copiedTextBox).toHaveValue("Hello World!")
+    })
+
+    test("Drag and Drop",async({page})=>{
+      await page.goto("https://testautomationpractice.blogspot.com/");
+      const sourceElement=page.getByText("Drag me to my target");
+      const targetElement=page.locator("#droppable");
+   
+      await sourceElement.dragTo(targetElement);
+   
+      const droppedText:string| null = await page.locator("#droppable p").textContent();
+
+      /**droppedText elementinden sonra bir boşluk bırakıp tag i girdiğimizde dragTo dan sonra
+       * oluşan texti locate edip ulaşabildim.
+       * textContent methodu string yada null döndürdüğü için bizde droppedText değerini string
+       * yada null olarak ayarladık ki bu dönüş için problem çıkarma demiş oluyoruz.
+       * Tabiki hiç dönüş tipi de vermeyebiliriz.
+       * Typescript kullandığımız için dönüş tipi verebiliyoruz.
+       */
+   
+      expect(droppedText).toBe("Dropped!");   
+   })
 })
