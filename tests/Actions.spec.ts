@@ -6,7 +6,7 @@ test.describe("Actions", () => {
     await page.goto("https://www.amazon.com/");
     const helloSignInLink = page.locator("#nav-link-accountList");
     await page.waitForSelector("#nav-link-accountList");
-    await helloSignInLink.hover();n 
+    await helloSignInLink.hover(); 
     await page.waitForTimeout(3000);
     const accountLink = page.locator("//span[text()='Account']");
     await accountLink.hover();
@@ -30,6 +30,10 @@ test.describe("Actions", () => {
     const expectedTextElement = page.locator("id=doubleClickMessage");
     //const expectedTextElement = page.getByText("You have done a double click")
     expect(await expectedTextElement.textContent()).toBe("You have done a double click");
+
+    /**playwright ta bir contextin kapanmasına gerek kalmadan aynı test methodunun içinde yeni bir 
+     * context (pencere, tab) açılarak örneğin farklı bir siteye gidilerek orada testler yapılabilir.
+     */
 
     const pageTwo = await context.newPage();
     await pageTwo.goto("https://testautomationpractice.blogspot.com/");
