@@ -68,25 +68,22 @@ test.describe("Actions", () => {
       expect(droppedText).toBe("Dropped!");   
    })
 
-   test("Keybord actions",async({page})=>{
-   
+   test("Keybord actions",async({page})=>{   
     await page.goto("https://www.ebay.com/");
     const serachBox=page.getByPlaceholder("Search for anything");
     
-    await serachBox.fill("phone holder for bike");
-    
-    await page.keyboard.down('Shift');
+    await serachBox.fill("phone holder for bike"); //search box a texti girdik    
+    await page.keyboard.down('Shift'); //shift e basılı tutuyoruz.
   
     for(let i=0;i<'bike'.length; i++){
-      await page.keyboard.press("ArrowLeft");
+      await page.keyboard.press("ArrowLeft");//press işlemi tek seferlik basmak tır. Down da basılı
+      //tutmuş oluyoruz.
       await page.waitForTimeout(1000);
     }
     
-    await page.keyboard.up("Shift");
-  
-    await page.waitForTimeout(1000);
-  
-    await page.keyboard.press("Backspace");
+    await page.keyboard.up("Shift");//shift ten elimizi çekmiş olduk burada
+    await page.waitForTimeout(1000);  
+    await page.keyboard.press("Backspace");//seçtiğimiz bike stringini burada silecek
   
     await page.keyboard.press("c");
     await page.keyboard.press("a");
