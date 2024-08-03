@@ -36,10 +36,10 @@ test("Multiple files upload",async({page})=>{
 
     await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
     const dosyalariSecInput=page.locator("id=filesToUpload");
-    await dosyalariSecInput.setInputFiles(["tests\\UploadFiles\\UploadFile1.pdf","tests\\UploadFiles\\UploadFile2.docx"]);
+    await dosyalariSecInput.setInputFiles(["tests\\UploadFiles\\UploadFile1.pdf","tests\\UploadFiles\\UploadFile2.xlsx"]);
   
     let fileNames:string[];
-    fileNames=["UploadFile1.pdf","UploadFile2.docx"];
+    fileNames=["UploadFile1.pdf","UploadFile2.xlsx"];
   
     const fileArray=page.locator("//ul[@id='fileList']/li");
   
