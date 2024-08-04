@@ -47,3 +47,24 @@ test("Multiple files upload",async({page})=>{
      expect(await fileArray.allTextContents()).toContain(fileName);
     }
 })
+
+test.only("Downloads",async({page})=>{ /**download işlemini ve doğrulamasını nasıl yapıyoruz */
+    await page.goto("https://demoqa.com/upload-download");
+ 
+    const downloadPromise=page.waitForEvent('download'); 
+    /**böyle bir event olacağını bildiriyoruz. bu işlem tetiklenince download işlemi gerçekleşecek
+     * ve attachment değeri downloadPromise e aktarılacak/ataması yapılacak */
+    await page.getByRole('link',{name:"Download"}).click();
+    const dowload=await downloadPromise;
+    
+    const filePath:string="C:\\Users\\faruk\\Downloads\\downloadImage.jpeg";
+    await dowload.saveAs(filePath)
+ 
+    const fs= require('fs');
+    expect(fs.existsSync(filePath)).toBe(true);
+ 
+   // const fs= require('fs');
+ 
+   // expect(fs.existsSync(await dowload.path())).toBe(true);
+ 
+ })
