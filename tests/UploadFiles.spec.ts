@@ -51,20 +51,32 @@ test("Multiple files upload",async({page})=>{
 test.only("Downloads",async({page})=>{ /**download işlemini ve doğrulamasını nasıl yapıyoruz */
     await page.goto("https://demoqa.com/upload-download");
  
-    const downloadPromise=page.waitForEvent('download'); 
+    const downloadPromise=page.waitForEvent('download'); //await yok çünkü ancak tetiklenince çalışacak
     /**böyle bir event olacağını bildiriyoruz. bu işlem tetiklenince download işlemi gerçekleşecek
      * ve attachment değeri downloadPromise e aktarılacak/ataması yapılacak */
     await page.getByRole('link',{name:"Download"}).click();
-    const dowload=await downloadPromise;
+    const download=await downloadPromise;/**dovnload promise i await li olarak download isimli bir 
+    değişkene atadık.*/
+
+    //console.log(await download.path()); 
+    /**path() methodu hata verdi bu nedenle saveAs methodunu kullandım. geçici temprary yolda*/
+    console.log(await download.saveAs);
+
+    //await download.saveAs("C:\\Users\\HP\\Downloads\\image.jpeg");
+    //indirdiğimiz dosyanın istediğimiz yere yolunu gösterdk.    
     
-    const filePath:string="C:\\Users\\faruk\\Downloads\\downloadImage.jpeg";
-    await dowload.saveAs(filePath)
+    const filePath:string="C:\\Users\\HP\\Downloads\\image2.jpeg";
+    await download.saveAs(filePath)
  
-    const fs= require('fs');
+    const fs= require('fs'); //file system fs-modulü. dosya işelmlerinde kullanılır. burada dosya
+    //yazma yada okuma için değil dosya yoluna erişip o dosyanın orada olup olmadığını kontrol etmek
+    //için kullanacağız. dosyanın doğru bir şekilde indirilip indirilmediğini kontrol edeceğiz.
+    //önce fs i içe aktarmamız, import etmemiz lazım, bir değişkene atayarak yaptık bunu.
+
     expect(fs.existsSync(filePath)).toBe(true);
  
-   // const fs= require('fs');
- 
-   // expect(fs.existsSync(await dowload.path())).toBe(true);
+   // const fs= require('fs'); 
+   // expect(fs.existsSync(await dowload.path())).toBe(true);//existxSync kontrol eden methodumuz.
+   // temprory yolu kontrol ediyor ama benimki hata vermişti yukarıda.
  
  })
