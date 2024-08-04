@@ -77,6 +77,5 @@ test.only("Downloads",async({page})=>{ /**download işlemini ve doğrulamasını
  
    // const fs= require('fs'); 
    // expect(fs.existsSync(await dowload.path())).toBe(true);//existxSync kontrol eden methodumuz.
-   // temprory yolu kontrol ediyor ama benimki hata vermişti yukarıda.
- 
+   // temprory yolu kontrol ediyor ama benimki hata vermişti yukarıda. 
  })
