@@ -1,7 +1,6 @@
 import{test,expect} from '@playwright/test';
 
-test("Upload files",async({page,context})=>{
-    
+test("Upload files",async({page,context})=>{    
     await page.goto("https://demoqa.com/upload-download");
 
     const uploadInput=page.locator("id=uploadFile"); 
@@ -33,7 +32,6 @@ test("Upload files",async({page,context})=>{
 })
 
 test("Multiple files upload",async({page})=>{
-
     await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
     const dosyalariSecInput=page.locator("id=filesToUpload");
     await dosyalariSecInput.setInputFiles(["tests\\UploadFiles\\UploadFile1.pdf","tests\\UploadFiles\\UploadFile2.xlsx"]);
@@ -77,6 +75,5 @@ test.only("Downloads",async({page})=>{ /**download işlemini ve doğrulamasını
  
    // const fs= require('fs'); 
    // expect(fs.existsSync(await dowload.path())).toBe(true);//existxSync kontrol eden methodumuz.
-   // temprory yolu kontrol ediyor ama benimki hata vermişti yukarıda.
- 
+   // temprory yolu kontrol ediyor ama benimki hata vermişti yukarıda. 
  })
