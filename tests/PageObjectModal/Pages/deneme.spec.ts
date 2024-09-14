@@ -1,3 +1,0 @@
-/**
- * pom test file
- */
