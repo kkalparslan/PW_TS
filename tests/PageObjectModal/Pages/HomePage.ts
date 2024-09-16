@@ -5,6 +5,7 @@ burada bir class oluşturcağız ve bu classın dışarıya açık olması yani 
 (dışarıdan çağırılabilecek). bunun için öncelikle export keyword unu kullanıyoruz. classın public 
 olması için default keywordu kullanılıyor. herhangi bir keyword kullanılmasa da zaten default olarak
 public oluyor.*/
+
 export default class Home {
     page: Page; //class levelinde bir page instance ı oluşturduk.
 
