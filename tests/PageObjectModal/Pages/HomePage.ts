@@ -20,4 +20,10 @@ export default class Home {
     async verifyTheAccecibility(url: string) { //doğrulama koyduk
         expect(url).toBe(this.page.url());
     }
+
+    loginBtn = () => this.page.locator("#login2");
+
+    async clickOnTheLoginBtn() {
+        await this.loginBtn().click();
+    }
 }
