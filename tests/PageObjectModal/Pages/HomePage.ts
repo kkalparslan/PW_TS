@@ -21,6 +21,11 @@ export default class Home {
         expect(url).toBe(this.page.url());
     }
 
+    /**
+     * locate işlemlerini klasik type belirten const, let gibi belirteçler ile değil de 
+     * arrow function içerisinde yaptı Farukk hoca. Sebebini yazalım tekrar.
+     */
+
     loginBtn = () => this.page.locator("#login2");
 
     async clickOnTheLoginBtn() {
