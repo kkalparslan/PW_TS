@@ -4,6 +4,12 @@ import * as data from '..\\TestData\\data.json';
 import LoggedIn from '../Pages/LoggedInPage';
 import Login from '../Pages/LoginPage'
 
+/**
+ * test_01 i bozmamak için kopyalayarak test_02 yi oluşturdum. test_01 de sayfayı açıp açılıp
+ * açılmadığını doğrulamıştık. Bu testte ise login olcağız ve login olup lmadığımızı 
+ * doğruşayacağız. 
+ */
+
 test.beforeEach(async({page,baseURL})=>{
     const home = new Home(page);
  await home.navigateToTheSite(`${baseURL}`);
@@ -25,5 +31,8 @@ test.only("Login test with right credentials",async({page})=>{
     await login.fillThePasswordBox(data.password);
     await login.clickOnTheSubmitBtn();
     await loggedIn.verifyTheLogin();
-
 })
+
+/**
+ * 
+ */
