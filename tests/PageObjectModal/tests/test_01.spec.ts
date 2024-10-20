@@ -10,7 +10,7 @@ test("Page accecibility test", async ({ page, baseURL }) => {
      * JavaScript'te string interpolation, bir dize içinde değişken veya ifadelerin doğrudan 
       kullanıldığı bir yöntemdir. Bu, genellikle template literals (şablon dizileri) kullanılarak 
       yapılır. Template literals, backtick işaretleri (`) ile yazılır ve ${} kullanarak değişkenler 
-      veya ifadeler interpolasyon yapılır.
+      veya ifadeler interpolasyon yapılır. 
      * TypeScript'teki string interpolation, JavaScript'teki kullanımına çok benzerdir çünkü TypeScript,
       JavaScript'in bir süperseti olarak çalışır. Dolayısıyla, template literals ve ${} kullanımı 
       TypeScript'te de aynıdır.
