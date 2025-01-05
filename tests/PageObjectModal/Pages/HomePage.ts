@@ -23,7 +23,7 @@ export default class Home {
 
     /**
      * locate işlemlerini klasik type belirten const, let gibi belirteçler ile değil de 
-     * arrow function içerisinde yaptı Farukk hoca. Sebebini yazalım tekrar.
+     * arrow function içerisinde yaptı Faruk hoca. Sebebini yazalım tekrar.
      */
 
     loginBtn = () => this.page.locator("#login2");

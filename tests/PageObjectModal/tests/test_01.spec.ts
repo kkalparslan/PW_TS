@@ -26,5 +26,6 @@ test("Page accecibility test", async ({ page, baseURL }) => {
   /**
    * testi terminalden çalıştırdım ama sadece bu testi test run ile çalıştıramadım.
    * "The test run did not record any output" sonucu veriyor. Faruk hocaya sorayım.
+   * Bu kez test run ile de çalıştı ancak headed modda açıyor.
    */
 })
