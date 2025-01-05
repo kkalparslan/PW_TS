@@ -25,5 +25,4 @@ test.only("Login test with right credentials",async({page})=>{
     await login.fillThePasswordBox(data.password);
     await login.clickOnTheSubmitBtn();
     await loggedIn.verifyTheLogin();
-
 })

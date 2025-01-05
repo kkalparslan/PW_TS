@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import Home from '../Pages/HomePage';
 import * as data from '..\\TestData\\data.json';
 
+
 test("Page accecibility test", async ({ page, baseURL }) => {
   const home = new Home(page);
 
@@ -29,3 +30,4 @@ test("Page accecibility test", async ({ page, baseURL }) => {
    * Bu kez test run ile de çalıştı ancak headed modda açıyor.
    */
 })
+

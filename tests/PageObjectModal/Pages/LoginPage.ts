@@ -11,6 +11,10 @@ export default class Login {
     async fillTheUsernameBox(username: string) {
         await this.username().fill(username);
     }
+    /**
+     * Classlar içerisinde herhangi bir field a const, let gibi tanımlamalar yapmıyoruz.
+     * Kullandığımız bu dilin özelliği.
+     */
 
     password = () => this.page.locator("#loginpassword");
     async fillThePasswordBox(password: string) {
