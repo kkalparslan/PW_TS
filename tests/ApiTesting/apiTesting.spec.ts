@@ -22,6 +22,6 @@ test ("get users", async({request}) => {
 /**
  * yukarıda basit bir api testi yaptık. öncelikle standart olarak importları oluşturup global bir
  * response ve responseBody tanımladım. test bloğu içinde response değişkenine get request ile 
- * gideceğimiz ücretsiz "reqres.in" adresinden url ve istediğimiz sonuç için gerekli parametressini
+ * gideceğimiz ücretsiz "reqres.in" adresinden url ve istediğimiz sonuç için gerekli parametresini
  * (pathini) aldık. 
  */
