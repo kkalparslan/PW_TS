@@ -1,6 +1,5 @@
 import {test,expect, APIResponse} from '@playwright/test'
 
-
 test("get users list",async({request})=>{
     let response:APIResponse;
     await test.step("get the user list",async()=>{
@@ -12,7 +11,7 @@ test("get users list",async({request})=>{
           console.log('lenght',dataLength);
           expect(response.status()).toBe(200);          
            
-        //5.kllanıcı bilgilerini getirdik:
+        //5.kullanıcı bilgilerini getirdik:
           const fifthUser = responseBody.data.at(4);
           /**
             const fifthUser = responseBody.data[4]; -->Klasik [] Notasyonu (Eski Yöntem)
@@ -31,7 +30,7 @@ test("get users list",async({request})=>{
           console.log(`Email: ${fifthUser?.email}`);
           console.log(`Avatar: ${fifthUser?.avatar}`);
         
-          expect(response.status()).toBe(200);
+          expect(response.status()).toBe(200); //assertion
     })
 })
 
